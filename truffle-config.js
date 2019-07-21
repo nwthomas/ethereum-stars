@@ -4,8 +4,13 @@ module.exports = {
   networks: {
     development: {
       host: "127.0.0.1",
-      port: 7545,
+      port: 9545,
       network_id: "*" // Matches any network ID
+    },
+    ganache: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*"
     },
     ropsten: {
       provider: () =>
