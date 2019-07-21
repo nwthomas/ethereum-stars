@@ -1,4 +1,4 @@
-pragma solidity >=0.4.24;
+pragma solidity ^0.5.0;
 
 //Importing openzeppelin-solidity ERC-721 implemented Standard
 import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
@@ -13,10 +13,10 @@ contract StarNotary is ERC721 {
 
     // Implement Task 1 Add a name and symbol properties
     // name: Is a short name to your token
-    string tokenName = "Limitless Star Coin";
+    string public tokenName = "Limitless Star Coin";
 
     // symbol: Is a short string like 'USD' -> 'American Dollar'
-    string symbol = "LSC";
+    string public symbol = "LSC";
 
     // mapping the Star with the Owner Address
     mapping(uint256 => Star) public tokenIdToStarInfo;
@@ -34,7 +34,7 @@ contract StarNotary is ERC721 {
 
     // Putting an Star for sale (Adding the star tokenid into the mapping starsForSale, first verify that the sender is the owner)
     function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
-        require(ownerOf(_tokenId) == msg.sender, "You can't sale the Star you don't owned");
+        require(ownerOf(_tokenId) == msg.sender, "You can't sell a Star that you don't own.");
         starsForSale[_tokenId] = _price;
     }
 
@@ -67,17 +67,29 @@ contract StarNotary is ERC721 {
     }
 
     // Implement Task 1 Exchange Stars function
-    function exchangeStars(uint256 _tokenId1, uint256 _tokenId2) public {
+    function exchangeStars(uint256 _tokenId1, uint256 _tokenId2) public returns (bool) {
         //1. Passing to star tokenId you will need to check if the owner of _tokenId1 or _tokenId2 is the sender
+        require(ownerOf(_tokenId1) == msg.sender || ownerOf(_tokenId2) == msg.sender, "You must own one of the stars to exchange it.");
+
         //2. You don't have to check for the price of the token (star)
+
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId1)
+        address ownerToken1 = ownerOf(_tokenId1);
+        address ownerToken2 = ownerOf(_tokenId2);
+
         //4. Use _transferFrom function to exchange the tokens.
+        safeTransferFrom(ownerToken1, ownerToken2, _tokenId1);
+        safeTransferFrom(ownerToken2, ownerToken1, _tokenId2);
+        return true;
     }
 
     // Implement Task 1 Transfer Stars
     function transferStar(address _to1, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
+        require(ownerOf(_tokenId) == msg.sender, "You must be the owner of the star to make the transfer.");
+
         //2. Use the transferFrom(from, to, tokenId); function to transfer the Star
+        safeTransferFrom(msg.sender, _to1, _tokenId);
     }
 
 }
