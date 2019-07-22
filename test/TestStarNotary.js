@@ -107,8 +107,8 @@ it("lets 2 users exchange stars", async () => {
   // 3. Verify that the owners changed
   const starOwner1 = await instance.ownerOf(starId1);
   const starOwner2 = await instance.ownerOf(starId2);
-  assert.equal(starOwner1, "0xF41f6967Cc13c7F65e5CA9308759923CEa086CaC");
-  assert.equal(starOwner2, "0x6a97A97eD2e3CeE4deeeee78e8c72a1eb532b457");
+  assert.equal(starOwner1, user2);
+  assert.equal(starOwner2, user1);
 });
 
 it("lets a user transfer a star", async () => {
