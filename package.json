@@ -1,5 +1,28 @@
 {
+  "name": "ethereum-stars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
-    "dotenv": "^8.0.0"
-  }
+    "dotenv": "^8.0.0",
+    "openzeppelin-solidity": "^2.3.0",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwthomas/ethereum-stars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwthomas/ethereum-stars/issues"
+  },
+  "homepage": "https://github.com/nwthomas/ethereum-stars#readme"
 }
